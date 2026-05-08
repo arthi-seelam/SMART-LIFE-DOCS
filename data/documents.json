@@ -1,0 +1,116 @@
+[
+  {
+    "id": "e3c22157-33ac-46e3-bbb0-32426edb3e55",
+    "userId": "5fbbee85-dca9-4da3-8491-c96100b95822",
+    "title": "DM[ASTRA]",
+    "fileUrl": "/data/uploads/75ce2dd17cf24c4eb99e9e3770d2bb11.pdf",
+    "fileType": "pdf",
+    "category": "Other",
+    "extractedText": "DOCUMENT\nTitle: DM[ASTRA]\nDate: 29/04/2026\nReference: REF-70AAA31A\nIssued for official use.",
+    "extractedFields": {
+      "Date": "29/04/2026"
+    },
+    "uploadDate": "2026-04-29T21:14:04.729443"
+  },
+  {
+    "id": "8ba14bc4-bcac-49e2-b6ca-b412f7665893",
+    "userId": "5fbbee85-dca9-4da3-8491-c96100b95822",
+    "title": "1595_cloud(develop)",
+    "fileUrl": "/data/uploads/ec6699ad26bd4adf860a73b17e3b89b0.pdf",
+    "fileType": "pdf",
+    "category": "Certificate",
+    "extractedText": "DOCUMENT\nTitle: 1595_cloud(develop)\nDate: 15/04/2026\nReference: REF-ADBF8246\nIssued for official use.",
+    "extractedFields": {
+      "Date": "15/04/2026"
+    },
+    "uploadDate": "2026-04-15T09:48:17.086472"
+  },
+  {
+    "id": "50979e2c-a9e1-40b5-95b8-f73be4f1a26d",
+    "userId": "cbb0c636-4fd7-48f3-8de1-1ca693009966",
+    "title": "medical new",
+    "fileUrl": "/data/uploads/e37805f5525d40349184d754c711513d.png",
+    "fileType": "image",
+    "category": "Medical",
+    "extractedText": "PRESCRIPTION\nPatient: Patient Name\nDate: 09/04/2026\nDr. Rajesh Kumar, MBBS MD\nCity Hospital\n\nMedicine 1: Paracetamol 500mg - 1 tablet twice daily\nMedicine 2: Azithromycin 250mg - 1 tablet daily\nNext Visit: 09/04/2026",
+    "extractedFields": {
+      "Next Visit": "09/04/2026",
+      "Doctor": "Rajesh Kumar, MBBS MD",
+      "Patient": "Patient Name"
+    },
+    "uploadDate": "2026-04-09T11:51:34.421742"
+  },
+  {
+    "id": "3e0e0769-f5ae-425f-bad2-04498af55c22",
+    "userId": "cbb0c636-4fd7-48f3-8de1-1ca693009966",
+    "title": "medical new",
+    "fileUrl": "/data/uploads/89d6fa785ace4ce9a292aebfa436e7aa.png",
+    "fileType": "image",
+    "category": "Medical",
+    "extractedText": "PRESCRIPTION\nPatient: Patient Name\nDate: 09/04/2026\nDr. Rajesh Kumar, MBBS MD\nCity Hospital\n\nMedicine 1: Paracetamol 500mg - 1 tablet twice daily\nMedicine 2: Azithromycin 250mg - 1 tablet daily\nNext Visit: 09/04/2026",
+    "extractedFields": {
+      "Next Visit": "09/04/2026",
+      "Doctor": "Rajesh Kumar, MBBS MD",
+      "Patient": "Patient Name"
+    },
+    "uploadDate": "2026-04-09T11:14:47.847779"
+  },
+  {
+    "id": "096feb4e-680d-4b14-88d9-5027e86dd473",
+    "userId": "cbb0c636-4fd7-48f3-8de1-1ca693009966",
+    "title": "Electricity bill sam",
+    "fileUrl": "/data/uploads/0eb1da97e72b4519a58b5c8e5c87ed92.png",
+    "fileType": "image",
+    "category": "Bill",
+    "extractedText": "ELECTRICITY BILL\nAccount No: 3759D309\nBilling Period: 09/04/2026\nUnits Consumed: 320 kWh\nAmount Due: Rs.2450\nDue Date: 09/04/2026\nPlease pay before due date.",
+    "extractedFields": {
+      "Due Date": "09/04/2026",
+      "Reference No": "3759D309",
+      "Account No": "3759D309",
+      "Units": "320"
+    },
+    "uploadDate": "2026-04-09T11:08:55.003015"
+  },
+  {
+    "id": "feeeea2c-53fb-4016-8aa1-af4e90306f56",
+    "userId": "cbb0c636-4fd7-48f3-8de1-1ca693009966",
+    "title": "insurance",
+    "fileUrl": "/data/uploads/8b14bda7efb8406b88ac44340825a2c4.jpeg",
+    "fileType": "image",
+    "category": "Insurance",
+    "extractedText": "INSURANCE POLICY\nPolicy Number: INS-D3650A\nPremium Amount: Rs.18500/year\nPolicy Start: 01/04/2026\nRenewal Date: 01/04/2026\nCoverage: Health Rs.5,00,000",
+    "extractedFields": {
+      "Renewal Date": "01/04/2026",
+      "Reference No": "INS-D3650A"
+    },
+    "uploadDate": "2026-04-01T10:42:26.726414"
+  },
+  {
+    "id": "324c4130-deca-4292-ae00-58f64b157a86",
+    "userId": "cbb0c636-4fd7-48f3-8de1-1ca693009966",
+    "title": "medical",
+    "fileUrl": "/data/uploads/d47f417e5a7b4f1aad3bf22c4e883d4b.jpeg",
+    "fileType": "image",
+    "category": "Medical",
+    "extractedText": "PRESCRIPTION\nPatient: Patient Name\nDate: 01/04/2026\nDr. Rajesh Kumar, MBBS MD\nCity Hospital\n\nMedicine 1: Paracetamol 500mg - 1 tablet twice daily\nMedicine 2: Azithromycin 250mg - 1 tablet daily\nNext Visit: 01/04/2026",
+    "extractedFields": {
+      "Next Visit": "01/04/2026",
+      "Doctor": "Rajesh Kumar, MBBS MD",
+      "Patient": "Patient Name"
+    },
+    "uploadDate": "2026-04-01T10:38:49.038234"
+  },
+  {
+    "id": "553fd90d-b4ab-43e9-b5db-3ab0856272e1",
+    "userId": "cbb0c636-4fd7-48f3-8de1-1ca693009966",
+    "title": "OIP (1)",
+    "fileUrl": "/data/uploads/b6903abcf9c94a5cb71fd7889f04e78d.jpg",
+    "fileType": "image",
+    "category": "Other",
+    "extractedText": "DOCUMENT\nTitle: OIP (1)\nDate: 01/04/2026\nReference: REF-2638BCB0\nIssued for official use.",
+    "extractedFields": {
+      "Date": "01/04/2026"
+    },
+    "uploadDate": "2026-04-01T10:08:09.023872"
+  }
+]

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Life Docs AI</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- ============ AUTH OVERLAY ============ -->
+<div id="authOverlay" class="auth-overlay">
+  <div class="auth-box">
+    <div class="auth-logo"><i class="fa-solid fa-brain"></i> Smart Life Docs AI</div>
+
+    <!-- LOGIN FORM -->
+    <div id="loginForm">
+      <h2>Welcome Back</h2>
+      <p class="auth-sub">Sign in to your document vault</p>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="you@example.com"/>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••••"/>
+      </div>
+      <div id="loginError" class="auth-error"></div>
+      <button class="btn-primary" onclick="handleLogin()">Sign In</button>
+      <p class="auth-switch">Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <div id="registerForm" style="display:none">
+      <h2>Create Account</h2>
+      <p class="auth-sub">Join Smart Life Docs AI</p>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="regName" placeholder="Your full name"/>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="regEmail" placeholder="you@example.com"/>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="regPassword" placeholder="Min 6 characters"/>
+      </div>
+      <div id="regError" class="auth-error"></div>
+      <button class="btn-primary" onclick="handleRegister()">Create Account</button>
+      <p class="auth-switch">Already registered? <a href="#" onclick="showLogin()">Sign In</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MAIN APP ============ -->
+<div id="mainApp" style="display:none">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <i class="fa-solid fa-brain"></i>
+      <span>Smart Life Docs</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" onclick="showPage('dashboard')">
+        <i class="fa-solid fa-gauge-high"></i> Dashboard
+      </a>
+      <a href="#" class="nav-item" onclick="showPage('upload')">
+        <i class="fa-solid fa-cloud-arrow-up"></i> Upload Document
+      </a>
+      <a href="#" class="nav-item" onclick="showPage('documents')">
+        <i class="fa-solid fa-folder-open"></i> My Documents
+      </a>
+      <a href="#" class="nav-item" onclick="showPage('reminders')">
+        <i class="fa-solid fa-bell"></i> Reminders
+        <span class="badge" id="reminderBadge">0</span>
+      </a>
+      <a href="#" class="nav-item" onclick="showPage('profile')">
+        <i class="fa-solid fa-user-circle"></i> Profile
+      </a>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fa-solid fa-circle-half-stroke"></i> Toggle Theme
+      </button>
+      <button class="logout-btn" onclick="handleLogout()">
+        <i class="fa-solid fa-right-from-bracket"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <button class="hamburger" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+    <div class="topbar-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="globalSearch" placeholder="Search documents..." oninput="searchDocuments()"/>
+    </div>
+    <div class="topbar-user">
+      <span id="topbarUsername">User</span>
+      <div class="avatar" id="topbarAvatar">U</div>
+    </div>
+  </div>
+
+  <!-- CONTENT AREA -->
+  <main class="main-content">
+
+    <!-- ===== DASHBOARD PAGE ===== -->
+    <div id="page-dashboard" class="page active">
+      <div class="page-header">
+        <h1>Dashboard</h1>
+        <p id="dashGreeting">Good morning!</p>
+      </div>
+
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--accent1)"><i class="fa-solid fa-file-lines"></i></div>
+          <div class="stat-info">
+            <span id="statDocs">0</span>
+            <label>Total Documents</label>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--accent2)"><i class="fa-solid fa-bell"></i></div>
+          <div class="stat-info">
+            <span id="statReminders">0</span>
+            <label>Active Reminders</label>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--accent3)"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="stat-info">
+            <span id="statDue">0</span>
+            <label>Due Soon</label>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon" style="background:var(--accent4)"><i class="fa-solid fa-check-circle"></i></div>
+          <div class="stat-info">
+            <span id="statDone">0</span>
+            <label>Completed</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Breakdown -->
+      <div class="section-title">Category Breakdown</div>
+      <div class="category-grid" id="categoryGrid"></div>
+
+      <!-- Recent Documents -->
+      <div class="section-title">Recent Documents</div>
+      <div class="doc-list" id="recentDocsList"></div>
+
+      <!-- Upcoming Reminders -->
+      <div class="section-title">Upcoming Reminders</div>
+      <div class="reminder-list" id="dashReminderList"></div>
+    </div>
+
+    <!-- ===== UPLOAD PAGE ===== -->
+    <div id="page-upload" class="page">
+      <div class="page-header">
+        <h1>Upload Document</h1>
+        <p>Upload and auto-extract information from your documents</p>
+      </div>
+
+      <div class="upload-card">
+        <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()"
+             ondragover="event.preventDefault()" ondrop="handleDrop(event)">
+          <i class="fa-solid fa-cloud-arrow-up drop-icon"></i>
+          <p>Drag & Drop your file here</p>
+          <span>or click to browse</span>
+          <small>Supported: PDF, JPG, PNG</small>
+          <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleFileSelect(event)"/>
+        </div>
+
+        <div id="filePreviewArea" style="display:none">
+          <div class="file-preview-box">
+            <i class="fa-solid fa-file-circle-check" id="previewIcon"></i>
+            <div>
+              <div id="previewFileName" class="preview-name"></div>
+              <div id="previewFileSize" class="preview-size"></div>
+            </div>
+            <button class="remove-file" onclick="removeFile()"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+
+          <div class="form-group">
+            <label>Document Title</label>
+            <input type="text" id="docTitle" placeholder="e.g. Electricity Bill March 2025"/>
+          </div>
+
+          <div class="form-group">
+            <label>Document Category</label>
+            <select id="docCategory">
+              <option value="auto">🤖 Auto Detect</option>
+              <option value="Bill">💡 Bill</option>
+              <option value="Medical">🏥 Medical</option>
+              <option value="Insurance">🛡️ Insurance</option>
+              <option value="Certificate">🎓 Certificate</option>
+              <option value="Government ID">🪪 Government ID</option>
+              <option value="Other">📁 Other</option>
+            </select>
+          </div>
+
+          <div class="progress-bar-wrap" id="progressWrap" style="display:none">
+            <div class="progress-bar" id="progressBar"></div>
+            <span id="progressText">Processing...</span>
+          </div>
+
+          <button class="btn-primary" onclick="uploadDocument()">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Upload & Extract Info
+          </button>
+        </div>
+      </div>
+
+      <!-- OCR Result -->
+      <div id="ocrResult" class="ocr-result" style="display:none">
+        <h3><i class="fa-solid fa-magnifying-glass-chart"></i> Extracted Information</h3>
+        <div class="extracted-fields" id="extractedFields"></div>
+        <div class="ocr-text-box">
+          <label>Full Extracted Text</label>
+          <pre id="ocrTextContent"></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== DOCUMENTS PAGE ===== -->
+    <div id="page-documents" class="page">
+      <div class="page-header">
+        <h1>My Documents</h1>
+        <p>All your stored documents in one place</p>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="docSearch" placeholder="🔍 Search documents..." oninput="filterDocuments()"/>
+        <select id="docFilter" onchange="filterDocuments()">
+          <option value="all">All Categories</option>
+          <option value="Bill">Bill</option>
+          <option value="Medical">Medical</option>
+          <option value="Insurance">Insurance</option>
+          <option value="Certificate">Certificate</option>
+          <option value="Government ID">Government ID</option>
+          <option value="Other">Other</option>
+        </select>
+        <select id="docSort" onchange="filterDocuments()">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="az">A → Z</option>
+        </select>
+      </div>
+
+      <div class="docs-grid" id="docsGrid"></div>
+      <div id="noDocsMsg" class="empty-state" style="display:none">
+        <i class="fa-solid fa-folder-open"></i>
+        <p>No documents found. Upload your first document!</p>
+        <button class="btn-primary" onclick="showPage('upload')">Upload Now</button>
+      </div>
+    </div>
+
+    <!-- ===== DOCUMENT DETAIL PAGE ===== -->
+    <div id="page-detail" class="page">
+      <div class="page-header">
+        <button class="back-btn" onclick="showPage('documents')"><i class="fa-solid fa-arrow-left"></i> Back</button>
+        <h1 id="detailTitle">Document Details</h1>
+      </div>
+      <div class="detail-grid">
+        <div class="detail-left">
+          <div class="detail-card">
+            <div class="detail-preview" id="detailPreview"></div>
+            <div class="detail-meta" id="detailMeta"></div>
+          </div>
+        </div>
+        <div class="detail-right">
+          <div class="detail-card">
+            <h3>Extracted Fields</h3>
+            <div id="detailFields"></div>
+          </div>
+          <div class="detail-card">
+            <h3>OCR Text</h3>
+            <pre id="detailOCR" class="ocr-pre"></pre>
+          </div>
+          <div class="detail-card">
+            <h3>Related Reminders</h3>
+            <div id="detailReminders"></div>
+            <button class="btn-secondary" style="margin-top:10px" onclick="openAddReminderFromDoc()">
+              <i class="fa-solid fa-plus"></i> Add Reminder
+            </button>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:10px">
+            <button class="btn-danger" onclick="deleteCurrentDoc()"><i class="fa-solid fa-trash"></i> Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== REMINDERS PAGE ===== -->
+    <div id="page-reminders" class="page">
+      <div class="page-header">
+        <h1>Reminders</h1>
+        <button class="btn-primary" onclick="openAddReminder()"><i class="fa-solid fa-plus"></i> Add Reminder</button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" onclick="filterReminders('all', this)">All</button>
+        <button class="tab" onclick="filterReminders('pending', this)">Pending</button>
+        <button class="tab" onclick="filterReminders('done', this)">Completed</button>
+      </div>
+
+      <div class="reminder-full-list" id="reminderFullList"></div>
+
+      <!-- Add/Edit Reminder Modal -->
+      <div class="modal" id="reminderModal">
+        <div class="modal-box">
+          <h3 id="reminderModalTitle">Add Reminder</h3>
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="reminderTitle" placeholder="e.g. Pay Electricity Bill"/>
+          </div>
+          <div class="form-group">
+            <label>Date & Time</label>
+            <input type="datetime-local" id="reminderDate"/>
+          </div>
+          <div class="form-group">
+            <label>Type</label>
+            <select id="reminderType">
+              <option value="bill">Bill Payment</option>
+              <option value="medicine">Medicine</option>
+              <option value="insurance">Insurance Renewal</option>
+              <option value="certificate">Certificate Expiry</option>
+              <option value="general">General</option>
+            </select>
+          </div>
+          <input type="hidden" id="reminderEditId"/>
+          <input type="hidden" id="reminderDocId"/>
+          <div class="modal-actions">
+            <button class="btn-primary" onclick="saveReminder()">Save</button>
+            <button class="btn-secondary" onclick="closeModal('reminderModal')">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PROFILE PAGE ===== -->
+    <div id="page-profile" class="page">
+      <div class="page-header">
+        <h1>Profile</h1>
+      </div>
+      <div class="profile-card">
+        <div class="profile-avatar" id="profileAvatar">U</div>
+        <div class="profile-info">
+          <h2 id="profileName">User Name</h2>
+          <p id="profileEmail">user@email.com</p>
+          <p class="profile-joined">Member since <span id="profileJoined">-</span></p>
+        </div>
+      </div>
+      <div class="profile-stats">
+        <div class="p-stat"><span id="pDocs">0</span><label>Documents</label></div>
+        <div class="p-stat"><span id="pReminders">0</span><label>Reminders</label></div>
+        <div class="p-stat"><span id="pDone">0</span><label>Completed</label></div>
+      </div>
+      <div class="profile-form-card">
+        <h3>Update Profile</h3>
+        <div class="form-group"><label>Full Name</label><input type="text" id="updateName"/></div>
+        <div class="form-group"><label>Email</label><input type="email" id="updateEmail" disabled/></div>
+        <button class="btn-primary" onclick="updateProfile()">Save Changes</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
